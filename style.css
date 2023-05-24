@@ -16,9 +16,7 @@ body{
     overflow: hidden;
 }
 
-.container:hover .top:before,
 .container:active .top:before,
-.container:hover .bottom:before,
 .container:active .bottom:before,
 .container:hover .top:after,
 .container:active .top:after,
@@ -27,6 +25,20 @@ body{
     margin-left: 200px;
     transform-origin: -200px 50%;
     transition: 0s;
+}
+
+.container:hover .top:before{
+    margin-left: 200px;
+    transform-origin: -200px 50%;
+    transition: 0s;
+    transform: rotate(45deg);
+}
+
+.container:hover .bottom:before{
+    margin-left: 200px;
+    transform-origin: -200px 50%;
+    transition: 0s;
+    transform: rotate(-45deg);
 }
 
 .container:hover .center,
@@ -52,7 +64,7 @@ body{
 }
 
 .top:before{
-    transform: rotate(450deg);
+    transform: rotate(90deg);
     background: #a8e10c;
 }
 
@@ -62,7 +74,7 @@ body{
 }
 
 .bottom:before{
-    transform: rotate(-450deg);
+    transform: rotate(-90deg);
     background: #ffdb15;
 }
 
