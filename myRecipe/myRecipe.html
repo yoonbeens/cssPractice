@@ -9,92 +9,81 @@
     <link rel="stylesheet" href="./myRecipe.css">
 
 </head>
+
 <body>
 
+	<div class="fileDiv">
+		<img id="fileImg" src="${pageContext.request.contextPath}/img/img_ready.png">
+	</div>
+	
     <div class="form_box">
         <h3>게시물 올리기</h3>
         <input class="input_field" type="text" placeholder="title" ><br>
         <input class="input_field" type="text" placeholder="제목을 입력해주세요." ><br>
-        <textarea class="textarea_field" placeholder="내용을 입력해주세요."></textarea><br>
+        <textarea id="content" class="textarea_field" placeholder="내용을 입력해주세요."></textarea><br>
 
         <form action="${pageContext.request.contextPath}/fileupload/" method="post" enctype="multipart/form-data">
             <label for="file">이미지업로드</label> 
             <input type="file" multiple="multiple" name="files" class="file_upload" id="file">
             <button id="uploadBtn">등록</button>
         </form>
-    </div>
-    
-</body>
+    </div>  
+	
+	<script>
 
-    <script>
+		const homePath = '${pageContext.request.contextPath}'
 
         //등록하기 버튼 클릭 이벤트
-		document.getElementById('uploadBtn').onclick = () => {
-			regist();
-		}
+		document.getElementById('uploadBtn').onclick = () => {regist();}
 
 		//등록을 담당하는 함수
 		function regist() {
 
-			//세션에서 현재 로그인 중인 사용자의 정보(아이디)를 얻어오자
+			//현재 로그인 중인 사용자
 			const userId = '${sessionScope.login}';
-			//자바스크립트로 첨부한 파일 확장자 체크
-			let file = document.getElementById('file').value;
-			console.log(userId);
-			console.log(file);
-			// .을 제거한 확장자만 얻어낸 후 소문자로 일괄 변경
-			file = file.slice(file.indexOf('.')+1).toLowerCase();
 
-			if(file !== 'jpg' && file!== 'png' && file !== 'jpeg' && file !== 'bmp') {
-				alert('이미지 파일(jpg, png, jpeg, bmp)만 등록이 가능합니다');
-				document.getElementById('file').value = '';
-				return;
-			} else if(userId === '') { //세션 데이터가 없다? -> 로그인 x
+			//파일 확장자만 남기기
+			let file = document.getElementById('file').value
+			let exe = file.slice(file.indexOf('.')+1).toLowerCase();
+			console.log(userId);
+			
+			if(userId === '') {
 				alert('로그인이 필요한 서비스 입니다.');
 				return;
-			}
-
-			/*
-			비동기 방식 요청에서 Form을 생성해서 보내주는 방법.
-			FormData 객체를 활용합니다.무조건 이 방식이 옳은 것은 아닙니다. 
-			FormData는 비동기 방식이 꼭 필요한 경우에만 사용합니다.
-			대부분의 경우에는 form 태그를 이용해서 전송하는 방식이 더 간편하고 자주 사용됩니다.
-			*/
+			} else if(exe !== 'jpg' && exe!== 'jpeg' && exe !== 'png' && exe !== 'bmp') {
+				alert('이미지 파일(jpg, jpeg, png, bmp)만 등록이 가능합니다');
+				file = '';
+				return;
+			} 
+			
+			//비동기 요청
 			const formData = new FormData();
 			const $data = document.getElementById('file'); //이미지 첨부하는 input
+			let content = document.getElementById('content').value; //textarea
 
 			console.log('$data: ' + $data);
+			console.log($data.files); //파일 태그에 담긴 파일 정보를 확인
+			console.log($data.files[0]); //등록한 최종 파일의 정보
 
-			//한 화면에 파일 업로드 버튼이 여러 개일 경우 요소의 인덱스를 지목해서 가져올 수 있음
-			//우리는 파일 첨부 버튼이 하나고, id를 지목해서 가져오기 때문에 인덱스를 쓸 필요는 없습니다.
-			// console.log('$data[0]: ' + $data[0]);
-
-			console.log($data.files); //파일 태그에 담긴 파일 정보를 확인하는 프로퍼티
-			console.log($data.files[0]);
-			//사용자가 등록한 최종 파일의 정보
-			//만약 우리가 여러 파일을 하나의 태그로 받을 수 있도록 multiple을 제공했다면
-			//files -> FileList에 여러 파일의 정보가 들어오게 됩니다.
-			//FileList는 유사 배열이기 때문에
-			//인덱스를 이용해서 여러 파일 중 하나를 지목할 수 있습니다.
-			//우리는 지금 multiple이 없기 때문에 [0] 이라고 작성하면 파일 정보를 얻을 수 있습니다
-
-			//FormData 객체에 사용자가 업로드한 파일의 정보가 들어있는 객체를 전달
-			formData.append('file', $data.files[0]);
-			formData.append('content', document.getElementById('content').value); //글 내용 추가
+			//업로드한 파일의 정보를 FormData에 전달
+			for(let i=0; i<$data.files.length; i++) formData.append(`file${i}`, $data.files[i]);
+			formData.append('content', content); //글 내용 추가
 			formData.append('writer', userId); //작성자 추가
 
-			//FormData 객체를 보낼 때는 따로 headers 설정을 진행하지 않습니다.
-			fetch('${pageContext.request.contextPath}/snsboard/upload', {method : 'post', body : formData})
+			//fetch
+			fetch(homePath + '/snsboard/upload', {method : 'post', body : formData})
 			.then(res => res.text())
 			.then(data => {
 				console.log(data);
-				document.getElementById('file').value = ''; //file input 비우기
-				document.getElementById('content').value = ''; //글 영역 비우기
+				file = ''; //file input 비우기
+				content = ''; //글 영역 비우기
 				document.querySelector('.fileDiv').style.display = 'none'; //미리보기 감추기
 				getList(1, true); //글 목록 함수 호출
 			});
 		} //end regist()
 
     </script>
+	
+</body>
 
 </html>
