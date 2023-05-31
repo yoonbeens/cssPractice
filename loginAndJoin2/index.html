@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign in & Sign up Form</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"> -->
+  </head>
+  <body>
+    <main>
+      <div class="box">
+        <div class="inner-box">
+          <div class="forms-wrap">
+            <form action="index.html" autocomplete="off" class="sign-in-form">
+              <div class="logo">
+                <!-- <img src="./img/logo.png" alt="easyclass" /> -->
+                <h4>SOUP</h4>
+              </div>
+
+              <div class="heading">
+                <h2>Recipe Title</h2>
+                <h6>댓글 쓰러 가기</h6>
+                <a href="#" class="toggle">comment</a>
+              </div>
+
+              <div class="actual-form">
+                <div class="input-wrap">
+                  <!-- <input
+                    type="text"
+                    minlength="4"
+                    class="input-field"
+                    autocomplete="off"
+                    required
+                  /> -->
+                  <label>간단 소개</label>
+                  <!-- <div>요리 소개</div> -->
+                </div>
+
+                <div class="input-wrap">
+                  <!-- <input
+                    type="password"
+                    minlength="4"
+                    class="input-field"
+                    autocomplete="off"
+                    required
+                  /> -->
+                  <label>예상 조리 시간</label>
+                  <!-- <div>예상 조리 시간</div> -->
+                </div>
+
+                <!-- <input type="submit" value="Timer Strat" class="sign-btn" />
+
+                <p class="text">
+                  Forgotten your password or you login datails?
+                  <a href="#">Get help</a> signing in
+                </p> -->
+
+
+
+
+
+
+
+                
+
+                
+                <div id="content">
+                  <div id="f5Text">
+                    <div id="text" style="margin-bottom: -25px;">
+                      <span id="minutes">3</span> <span> minutes</span>
+                    </div>
+                    <!--end text-->
+                  </div>
+                  <!--end f5Text-->
+             
+                  <!--modal pop-up-->
+                  <div class="background">
+                    <div class="window">
+                      <div class="popup">
+                        <button id="close">X</button>
+                        <form>
+                          <div class="select">
+                            <input id="hour" type="number" placeholder="시간" />
+                            <input id="min" type="number" placeholder="분" />
+                            <input id="sec" type="number" placeholder="초" />
+                          </div>
+                          <!--end select-->
+                          <br />
+                          <br />
+                          <div id="colorBox">
+                            <div id="clColor">
+                              <span class="popupText">시계 색상</span>
+                              <div class="cp_wrapper">
+                                <input id="clockColor" type="color" value="#ff6e6e" />
+                              </div>
+                              <!--end cp_wrapper-->
+                            </div>
+                            <!--end clColor-->
+                            <div id="bgColor">
+                              <span class="popupText">배경 색상</span>
+                              <div class="cp_wrapper">
+                                <input id="backColor" type="color" value="#c5e1ff" />
+                              </div>
+                              <!--end cp_wrapper-->
+                            </div>
+                            <!--end bgColor-->
+                          </div>
+                          <!--end colorBox-->
+                          <!--end cp_wrapper-->
+                          <div class="wrapper">
+                            <input type="reset" id="formReset" value="기본값" />
+                            <button type="button" id="submit">적용</button>
+                          </div>
+                          <!--end wrapper-->
+                        </form>
+                      </div>
+                      <!--end popup-->
+                    </div>
+                    <!--end window-->
+                  </div>
+                  <!--end background-->
+                  <div class="zoomContents">
+                    <div id="buttons">
+                      <!-- <button id="timerButton" class="start">시작</button> -->
+                      <button id="reset">초기화</button>
+                    </div>
+                    <div class="clockBox">
+                        <div id="f5">
+                            <div id="timer" class="start">
+                                <div id="mask"></div>
+                                <!--end mask-->
+                            </div>
+                            <!--end timer-->
+                        </div>
+                    </div>
+                    <!--end clockBox, #f5-->
+                    <!--end buttons-->
+                  </div>
+                  <!--end zoomContents-->
+                </div>
+                <!--end content-->
+                <!--<button id="fullButton">전체화면</button>-->
+                <div class="toast">Error</div>
+                <script src="script.js"></script>
+                <!-- toastr js 라이브러리 -->
+                <script
+                  type="text/javascript"
+                  src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+                ></script>
+
+
+              </div>
+            </form>
+
+            <form action="index.html" autocomplete="off" class="sign-up-form">
+              <div class="logo">
+                <!-- <img src="./img/logo.png" alt="easyclass" /> -->
+                <h4>좋아요</h4>
+                <h4>즐겨찾기</h4>
+              </div>
+
+              <div class="heading">
+                <h2>Get Started</h2>
+                <h6>요리 시간 재기</h6>
+                <a href="#" class="toggle">Timer</a>
+              </div>
+
+              <div class="actual-form">
+                <div class="input-wrap">
+                  <input
+                    type="text"
+                    minlength="4"
+                    class="input-field"
+                    autocomplete="off"
+                    required
+                  />
+                  <label>Name</label>
+                </div>
+
+                <div class="input-wrap">
+                  <input
+                    type="email"
+                    class="input-field"
+                    autocomplete="off"
+                    required
+                  />
+                  <label>Email</label>
+                </div>
+
+                <div class="input-wrap">
+                  <input
+                    type="password"
+                    minlength="4"
+                    class="input-field"
+                    autocomplete="off"
+                    required
+                  />
+                  <label>Password</label>
+                </div>
+
+                <input type="submit" value="Sign Up" class="sign-btn" />
+
+                <p class="text">
+                  By signing up, I agree to the
+                  <a href="#">Terms of Services</a> and
+                  <a href="#">Privacy Policy</a>
+                </p>
+              </div>
+            </form>
+          </div>
+
+          <div class="carousel">
+            <div class="images-wrapper">
+              <img src="./img/image1.png" class="image img-1 show" alt="" />
+              <img src="./img/image2.png" class="image img-2" alt="" />
+              <img src="./img/image3.png" class="image img-3" alt="" />
+            </div>
+
+            <div class="text-slider">
+              <div class="text-wrap">
+                <div class="text-group">
+                  <h2>Create your own courses</h2>
+                  <h2>Customize as you like</h2>
+                  <h2>Invite students to your class</h2>
+                </div>
+              </div>
+
+              <div class="bullets">
+                <span class="active" data-value="1"></span>
+                <span data-value="2"></span>
+                <span data-value="3"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Javascript file -->
+
+    <script src="app.js"></script>
+  </body>
+</html>
